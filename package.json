@@ -1,45 +1,122 @@
 {
   "name": "eb",
-	"displayName": "novel-fish",
-	"description": "novel for fish",
-	"version": "0.0.1",
-	"engines": {
-		"vscode": "^1.54.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-        "onCommand:eb.helloWorld"
-	],
-	"main": "./out/extension.js",
-	"contributes": {
-		"commands": [
-			{
-				"command": "eb.helloWorld",
-				"title": "Hello World"
-			}
-		]
-	},
-	"scripts": {
-		"vscode:prepublish": "yarn run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"pretest": "yarn run compile && yarn run lint",
-		"lint": "eslint src --ext ts",
-		"test": "node ./out/test/runTest.js"
-	},
-	"devDependencies": {
-		"@types/vscode": "^1.54.0",
-		"@types/glob": "^7.1.3",
-		"@types/mocha": "^8.0.4",
-		"@types/node": "^12.11.7",
-		"eslint": "^7.19.0",
-		"@typescript-eslint/eslint-plugin": "^4.14.1",
-		"@typescript-eslint/parser": "^4.14.1",
-		"glob": "^7.1.6",
-		"mocha": "^8.2.1",
-		"typescript": "^4.1.3",
-		"vscode-test": "^1.5.0"
-	}
+  "displayName": "novel-fish",
+  "description": "novel for fish",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.54.1"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "摸鱼",
+    "小说",
+    "book",
+    "novel",
+    "txt",
+    "神器"
+  ],
+  "activationEvents": [
+    "onCommand:extension.prevPage",
+    "onCommand:extension.nextPage",
+    "onCommand:extension.prevChapter",
+    "onCommand:extension.nextChapter"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "novel-fish",
+      "type": "object",
+      "properties": {
+        "novelFish.currPageNumber": {
+          "type": "number",
+          "default": 1,
+          "description": "当前小说页数(支持跳转)"
+        },
+        "novelFish.currChapter": {
+          "type": "string",
+          "default": "",
+          "enum": [],
+          "description": "当前小说章节(支持跳转)"
+        },
+        "novelFish.pageSize": {
+          "type": "number",
+          "default": 50,
+          "description": "每页文字数量"
+        },
+        "novelFish.lineBreak": {
+          "type": "string",
+          "default": " ",
+          "description": "换行分隔符号，默认一个空格"
+        },
+        "novelFish.filePath": {
+          "type": "string",
+          "default": "",
+          "description": "小说绝对路径"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "extension.prevPage",
+        "title": "上一页"
+      },
+      {
+        "command": "extension.nextPage",
+        "title": "下一页"
+      },
+      {
+        "command": "extension.prevChapter",
+        "title": "上一章"
+      },
+      {
+        "command": "extension.nextChapter",
+        "title": "下一章"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.prevPage",
+        "key": "ctrl+left",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "extension.nextPage",
+        "key": "ctrl+right",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "extension.prevChapter",
+        "key": "ctrl+up",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "extension.nextChapter",
+        "key": "ctrl+down",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "yarn run compile && yarn run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.54.0",
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.0.4",
+    "@types/node": "^12.11.7",
+    "eslint": "^7.19.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
+    "glob": "^7.1.6",
+    "mocha": "^8.2.1",
+    "typescript": "^4.1.3",
+    "vscode-test": "^1.5.0"
+  }
 }
